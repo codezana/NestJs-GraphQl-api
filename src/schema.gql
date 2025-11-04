@@ -1,0 +1,520 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type About {
+  createdAt: DateTime!
+  description: String!
+  email: String!
+  id: Int!
+  logo: String!
+  phone: String!
+  social: [SocialMedia!]
+  updatedAt: DateTime!
+}
+
+type AboutResponse {
+  data: About
+  message: String!
+  status: Int!
+}
+
+type Choice {
+  """کلیلی هەڵبژاردن (A, B, C, D)"""
+  choiceKey: String!
+
+  """ناوەڕۆکی دەقی هەڵبژاردن"""
+  choiceText: String!
+
+  """بەرواری دروستکردنی هەڵبژاردن"""
+  createdAt: DateTime!
+
+  """ناسێنەری تایبەت بۆ هەڵبژاردن"""
+  id: Int!
+
+  """ئایا ئەم هەڵبژاردنە ڕاستە"""
+  isCorrect: Boolean!
+  question: Question
+
+  """دوا بەرواری نوێکردنەوەی هەڵبژاردن"""
+  updatedAt: DateTime!
+}
+
+input CreateAboutInput {
+  description: String!
+  email: String!
+  logo: String!
+  phone: String!
+}
+
+input CreateChoiceInput {
+  """کلیلی هەڵبژاردن (A, B, C, D)"""
+  choiceKey: String!
+
+  """ناوەڕۆکی دەقی هەڵبژاردن"""
+  choiceText: String!
+
+  """ئایا ئەم هەڵبژاردنە ڕاستە"""
+  isCorrect: Boolean! = false
+}
+
+input CreateLevelInput {
+  """ئایا ئاستەکە چالاکە"""
+  is_active: Boolean! = true
+
+  """ژمارەی ئاستەکە"""
+  level_key: Int!
+
+  """ناسنامەی ئەو بەشەی ئەم ئاستە سەر بە..."""
+  partId: Int
+
+  """ناونیشانی ئاستەکان"""
+  title: String!
+}
+
+input CreatePartInput {
+  """وەسفی بەش"""
+  description: String!
+
+  """وێنۆچکەی بەش"""
+  icon: String!
+
+  """چالاکی بەش"""
+  is_active: Boolean! = true
+
+  """ناونیشانی بەش"""
+  title: String!
+}
+
+input CreateProjectChoiceInput {
+  """کلیلی هەڵبژاردن (A, B, C, D)"""
+  choiceKey: String!
+
+  """ناوەڕۆکی دەقی هەڵبژاردن"""
+  choiceText: String!
+
+  """ئایا ئەم هەڵبژاردنە ڕاستە"""
+  isCorrect: Boolean! = false
+}
+
+input CreateProjectExamInput {
+  description: String!
+  isActive: Boolean
+  projectId: Int
+  title: String!
+  total_degree: Int!
+}
+
+input CreateProjectInput {
+  description: String!
+  isActive: Boolean
+  title: String!
+}
+
+input CreateProjectQuestionInput {
+  choices: [CreateProjectChoiceInput!]!
+
+  """نمرەی پرسیارەکە"""
+  degree: Int!
+  projectExamId: Int
+
+  """ناونیشانی پرسیارەکە"""
+  title: String!
+}
+
+input CreateProjectRegistrationInput {
+  projectId: Int!
+}
+
+input CreateProjectUserAnswerInput {
+  questionId: Int!
+  registrationId: Int!
+  selectedChoiceId: Int!
+}
+
+input CreateQuestionInput {
+  choices: [CreateChoiceInput!]!
+
+  """نمرەی پرسیارەکان"""
+  degree: Int
+  levelId: Int
+
+  """ناونیشانی پرسیارەکە"""
+  title: String!
+}
+
+input CreateQuizUserInput {
+  city: String!
+  email: String!
+  ipAddress: String!
+  name: String!
+  phone: String!
+}
+
+input CreateSocialMediaInput {
+  aboutId: Int!
+  icon: String!
+  url: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Level {
+  """بەرواری دروستکردنی هەڵبژاردن"""
+  createdAt: DateTime!
+
+  """ناسێنەری تایبەت بۆ ئاستەکان"""
+  id: Int!
+
+  """ئایا ئاستەکە چالاکە"""
+  is_active: Boolean!
+
+  """ژمارەی ئاستەکان"""
+  level_key: Int!
+  part: Part
+  questions: [Question!]
+
+  """ناونیشانی ئاستەکان"""
+  title: String!
+
+  """دوا بەرواری نوێکردنەوەی هەڵبژاردن"""
+  updatedAt: DateTime!
+}
+
+type LevelResponse {
+  data: Level
+  message: String!
+  status: Int!
+}
+
+type Mutation {
+  createAbout(input: CreateAboutInput!): AboutResponse!
+  createLevel(input: CreateLevelInput!): LevelResponse!
+  createPart(input: CreatePartInput!): PartResponse!
+  createProjectExam(input: CreateProjectExamInput!): ProjectExamResponse!
+  createProjectQuestion(input: CreateProjectQuestionInput!): ProjectQuestionResponse!
+  createProjectRegistration(input: CreateProjectRegistrationInput!, quizinput: CreateQuizUserInput!): ProjectRegistrationResponse!
+  createProjectUserAnswer(Input: CreateProjectUserAnswerInput!): ProjectUserAnswerResponse!
+  createQuestion(input: CreateQuestionInput!): QuestionResponse!
+  createSocialMedia(input: CreateSocialMediaInput!): SocialResponse!
+  createproject(input: CreateProjectInput!): ProjectResponse!
+  removeAbout(id: Int!): AboutResponse!
+  removeLevel(id: Int!): LevelResponse!
+  removePart(id: Int!): PartResponse!
+  removeProjectExam(id: Int!): ProjectExamResponse!
+  removeProjectQuestion(id: Int!): ProjectQuestionResponse!
+  removeProjectRegistration(id: Int!): ProjectRegistrationResponse!
+  removeQuestion(id: Int!): QuestionResponse!
+  removeQuizUser(id: Int!): QuizUserResponse!
+  removeSocialMedia(id: Int!): SocialResponse!
+  removeproject(id: Int!): ProjectResponse!
+  updateAbout(id: Int!, input: UpdateAboutInput!): AboutResponse!
+  updateLevel(id: Int!, input: UpdateLevelInput!): LevelResponse!
+  updatePart(id: Int!, input: UpdatePartInput!): PartResponse!
+  updateProjectExam(id: Int!, input: UpdateProjectExamInput!): ProjectExamResponse!
+  updateProjectQuestion(id: Int!, input: UpdateProjectQuestionInput!): ProjectQuestionResponse!
+  updateProjectRegistration(id: Int!, input: UpdateProjectRegistrationInput!): ProjectRegistrationResponse!
+  updateQuestion(id: Int!, input: UpdateQuestionInput!): QuestionResponse!
+  updateQuizUser(id: Int!, input: UpdateQuizUserInput!): QuizUserResponse!
+  updateproject(id: Int!, input: UpdateProjectInput!): ProjectResponse!
+  updatesocial(id: Int!, input: UpdateSocialMediaInput!): SocialResponse!
+}
+
+type Part {
+  """بەرواری دروستکردنی بەش"""
+  createdAt: DateTime!
+
+  """وەسفی بەش"""
+  description: String!
+
+  """وێنۆچکەی بەش"""
+  icon: String!
+
+  """ناسێنەری تایبەت بۆ بەش"""
+  id: Int!
+
+  """ئایا بەشەکە چالاکە"""
+  is_active: Boolean!
+
+  """ئاستەکانی ئەم بەشە"""
+  levels: [Level!]
+
+  """ناونیشانی بەش"""
+  title: String!
+
+  """دوا بەرواری نوێکردنەوەی بەش"""
+  updatedAt: DateTime!
+}
+
+type PartResponse {
+  data: Part
+  message: String!
+  status: Int!
+}
+
+type Project {
+  description: String!
+  id: Int!
+  isActive: Boolean
+  projectExam: [ProjectExam!]
+  title: String!
+}
+
+type ProjectChoice {
+  choiceKey: String!
+  choiceText: String!
+  createdAt: DateTime!
+  id: Int!
+  isCorrect: Boolean!
+  projectQuestion: ProjectQuestion
+  updatedAt: DateTime!
+  userAnswers: [ProjectUserAnswer!]
+}
+
+type ProjectExam {
+  description: String!
+  id: Int!
+  isActive: Boolean
+  project: [Project!]
+  projectQuestions: [ProjectQuestion!]
+  title: String!
+  total_degree: Int
+}
+
+type ProjectExamResponse {
+  data: ProjectExam
+  message: String!
+  status: Int!
+}
+
+type ProjectQuestion {
+  createdAt: DateTime!
+  degree: Int
+  id: Int!
+  projectChoice: [ProjectChoice!]
+  projectExam: ProjectExam
+  title: String!
+  updatedAt: DateTime!
+  userAnswers: [ProjectUserAnswer!]
+}
+
+type ProjectQuestionResponse {
+  data: ProjectQuestion
+  message: String!
+  status: Int!
+}
+
+type ProjectRegistration {
+  id: Int!
+  project: Project!
+  quizUser: QuizUser!
+  registeredAt: DateTime!
+  totalScore: Int
+  userAnswers: [ProjectUserAnswer!]
+}
+
+type ProjectRegistrationResponse {
+  data: ProjectRegistration
+  message: String!
+  status: Int!
+}
+
+type ProjectResponse {
+  data: Project
+  message: String!
+  status: Int!
+}
+
+type ProjectUserAnswer {
+  answeredAt: DateTime!
+  id: Int!
+  isCorrect: Boolean
+  question: ProjectQuestion
+  registration: ProjectRegistration
+  selectedChoice: ProjectChoice
+}
+
+type ProjectUserAnswerResponse {
+  data: ProjectUserAnswer
+  message: String!
+  status: Int!
+}
+
+type Query {
+  IndexAbout: [About!]!
+  IndexLevel: [Level!]!
+  IndexPart: [Part!]!
+  IndexProject: [Project!]!
+  IndexProjectExam: [ProjectExam!]!
+  IndexProjectQuestion: [ProjectQuestion!]!
+  IndexProjectRegistration: [ProjectRegistration!]!
+  IndexProjectUserAnswer: [ProjectUserAnswer!]!
+  IndexQuestion: [Question!]!
+  IndexQuizUser: [QuizUser!]!
+  IndexSocialMedia: [SocialMedia!]!
+  IndexUsers: [User!]!
+  ShowAbout(id: Int!): About!
+  ShowLevel(id: Int!): Level!
+  ShowPart(id: Int!): Part!
+  ShowProject(id: Int!): Project!
+  ShowProjectExam(id: Int!): ProjectExam!
+  ShowProjectQuestion(id: Int!): ProjectQuestion!
+  ShowProjectRegistration(id: Int!): ProjectRegistration!
+  ShowProjectUserAnswer(id: Int!): ProjectUserAnswer!
+  ShowQuestion(id: Int!): Question!
+  ShowQuizUser(id: Int!): QuizUser!
+  ShowSocialMedia(id: Int!): About!
+  ShowUser(id: Int!): User!
+}
+
+type Question {
+  choices: [Choice!]
+
+  """بەرواری دروستکردنی هەڵبژاردن"""
+  createdAt: DateTime!
+
+  """نمرەی پرسیارەکان"""
+  degree: Int
+
+  """ناسێنەری تایبەت بۆ پرسیارەکان"""
+  id: Int!
+  level: Level
+
+  """ناونیشانی پرسیارەکان"""
+  title: String!
+
+  """دوا بەرواری نوێکردنەوەی هەڵبژاردن"""
+  updatedAt: DateTime!
+}
+
+type QuestionResponse {
+  data: Question
+  message: String!
+  status: Int!
+}
+
+type QuizUser {
+  city: String!
+  email: String!
+  id: Int!
+  ipAddress: String!
+  name: String!
+  phone: String!
+}
+
+type QuizUserResponse {
+  data: QuizUser
+  message: String!
+  status: Int!
+}
+
+type SocialMedia {
+  about: About
+  icon: String!
+  id: Int!
+  url: String!
+}
+
+type SocialResponse {
+  data: SocialMedia
+  message: String!
+  status: Int!
+}
+
+input UpdateAboutInput {
+  description: String
+  email: String
+  logo: String
+  phone: String
+}
+
+input UpdateLevelInput {
+  """ئایا ئاستەکە چالاکە"""
+  is_active: Boolean = true
+
+  """ژمارەی ئاستەکە"""
+  level_key: Int
+
+  """ناسنامەی ئەو بەشەی ئەم ئاستە سەر بە..."""
+  partId: Int
+
+  """ناونیشانی ئاستەکان"""
+  title: String
+}
+
+input UpdatePartInput {
+  """وەسفی بەش"""
+  description: String
+
+  """وێنۆچکەی بەش"""
+  icon: String
+
+  """چالاکی بەش"""
+  is_active: Boolean = true
+
+  """ناونیشانی بەش"""
+  title: String
+}
+
+input UpdateProjectExamInput {
+  description: String
+  isActive: Boolean
+  projectId: Int
+  title: String
+  total_degree: Int
+}
+
+input UpdateProjectInput {
+  description: String
+  isActive: Boolean
+  title: String
+}
+
+input UpdateProjectQuestionInput {
+  choices: [CreateProjectChoiceInput!]
+
+  """نمرەی پرسیارەکە"""
+  degree: Int
+  projectExamId: Int
+
+  """ناونیشانی پرسیارەکە"""
+  title: String
+}
+
+input UpdateProjectRegistrationInput {
+  projectId: Int
+}
+
+input UpdateQuestionInput {
+  choices: [CreateChoiceInput!]
+
+  """نمرەی پرسیارەکان"""
+  degree: Int
+  levelId: Int
+
+  """ناونیشانی پرسیارەکە"""
+  title: String
+}
+
+input UpdateQuizUserInput {
+  city: String
+  email: String
+  ipAddress: String
+  name: String
+  phone: String
+}
+
+input UpdateSocialMediaInput {
+  aboutId: Int
+  icon: String
+  url: String
+}
+
+type User {
+  id: Int!
+  role: String!
+  username: String!
+}
